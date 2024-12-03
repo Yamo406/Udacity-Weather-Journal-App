@@ -25,22 +25,42 @@ app.use(express.static("website"));
 const port = 9000;
 
 const server = app.listen(port, () => {
+    // Callback to debug
     console.log(`server running on ${port}`);
-})
+});
 
-// Callback to debug
 app.route('/')
-    .get((req, res) => {
-        res.send("GET is running on the homepage");
-    })
-    .post((req, res) => {
-        res.send("POST is running on the homepage");
-    })
-// Initialize all route with a callback function
-app.get('/all', (req, res) => {
+    .get(getHomepage)
+    .post(postHomepage)
 
-})
+function getHomepage(req, res) {
+    res.send("GET is running on the homepage");
+    console.log("GET is running on the homepage");
+}
+function postHomepage(req, res) {
+    res.send("POST is running on the homepage");
+    console.log("POST is running on the homepage");
+}
+
+
+// Initialize all route with a callback function
+app.route('/all')
+    .get(getProjectData)
+    .post(postProjectData)
+    ;
 
 // Callback function to complete GET '/all'
+function getProjectData(req, res) {
+    console.log("Received GET request on \'\/all\'");
+    res.send(projectData);
+}
 
 // Post Route
+function postProjectData(req, res) {
+    console.log("Received POST request on \'\/all\'")
+    let reqBody = req.body;
+    projectData.temperature = reqBody.temperature;
+    projectData.date = reqBody.date;
+    projectData.userResponse = reqBody.userResponse;
+    res.send(projectData);
+}
