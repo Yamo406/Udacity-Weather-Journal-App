@@ -28,27 +28,10 @@ body{
 }
 
 .entry{
-    /* background: rgba(59, 74, 107, .4); */
     background: #293821;
     color: #fff;
     border-radius: 8px;
     font-size: 24px;
-}
-
-#entryHolder{
-
-}
-
-#date{
-
-}
-
-#temp{
-
-}
-
-#content{
-
 }
 
 .headline {
@@ -105,7 +88,6 @@ button{
     border: none;
     border-radius: 12px;
     padding: 8px;
- /* box-shadow: 2px 4px 5px #; */
 }
 button:hover{
     background: #35d60d;

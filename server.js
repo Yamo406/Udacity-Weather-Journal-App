@@ -66,5 +66,4 @@ function postProjectData(req, res) {
 
     console.log("Updated Project Data: ", projectData)
     res.status(200).json(projectData)
-    // res.send(projectData);
 }
