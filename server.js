@@ -29,38 +29,42 @@ const server = app.listen(port, () => {
     console.log(`server running on ${port}`);
 });
 
-app.route('/')
-    .get(getHomepage)
-    .post(postHomepage)
+app.get('/', getHomepage)
 
 function getHomepage(req, res) {
-    res.send("GET is running on the homepage");
     console.log("GET is running on the homepage");
+    res.send("GET is running on the homepage");
 }
+
+app.post('/', postHomepage)
+
 function postHomepage(req, res) {
-    res.send("POST is running on the homepage");
     console.log("POST is running on the homepage");
+    res.send("POST is running on the homepage");
 }
 
 
 // Initialize all route with a callback function
-app.route('/all')
-    .get(getProjectData)
-    .post(postProjectData)
-    ;
+app.get('/all', getProjectData);
+
+app.post('/add', postProjectData);
 
 // Callback function to complete GET '/all'
 function getProjectData(req, res) {
-    console.log("Received GET request on \'\/all\'");
+    console.log("Received GET request on \'\/all\' route.");
     res.send(projectData);
 }
 
 // Post Route
 function postProjectData(req, res) {
-    console.log("Received POST request on \'\/all\'")
-    let reqBody = req.body;
-    projectData.temperature = reqBody.temperature;
-    projectData.date = reqBody.date;
-    projectData.userResponse = reqBody.userResponse;
-    res.send(projectData);
+    console.log("Received POST request on '/add' route.")
+    console.log("Request Body: ", req.body)
+
+    projectData.temp = req.body.temp;
+    projectData.date = req.body.date;
+    projectData.feel = req.body.feel;
+
+    console.log("Updated Project Data: ", projectData)
+    res.status(200).json(projectData)
+    // res.send(projectData);
 }
