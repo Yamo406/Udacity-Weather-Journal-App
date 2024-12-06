@@ -43,7 +43,6 @@ const getWeatherData = async (baseURL, userZipCode, apiKey) => {
             throw new Error(`Response Status: ${res.status}`);
         }
         const apiData = await res.json();
-        console.log(apiData);
         return apiData;
 
     } catch (error) {
@@ -53,7 +52,6 @@ const getWeatherData = async (baseURL, userZipCode, apiKey) => {
 
 /* Function to POST data */
 const postWeatherData = async (url = ' ', data = {}) => {
-    console.log(data);
     // const res = await fetch(url, {
     const res = await fetch("http://localhost:9000/add", {
         method: 'POST',
@@ -66,7 +64,6 @@ const postWeatherData = async (url = ' ', data = {}) => {
 
     try {
         const newData = await res.json();
-        console.log(newData);
         return newData;
     } catch (error) {
         console.error("Error posting weather Data:", error);
@@ -80,7 +77,6 @@ const retrieveAppData = async () =>{
     try {
         // Transform into JSON
         const allData = await req.json()
-        console.log(allData)
         // Write updated data to DOM elements
         document.querySelector('#temp').innerHTML = `${Math.round(allData.temp)} degrees`;
         document.querySelector('#content').innerHTML = allData.feel;
